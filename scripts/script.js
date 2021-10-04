@@ -1,11 +1,10 @@
 let myLibrary = [];
 
-const book1 =  new Book("Harry Potter", "transphobia", '300', "not read");
-const book2 =  new Book("The iCarly chronices", "Dan the Feet man", "420", "read");
-const book3 =  new Book("The Great Gatsby", "F. Scott Fitzgerald", "350", "not read");
-const book4 =  new Book('The Bible', "Many, many others", "4200", "not read");
+const book1 =  new Book("Harry Potter", "transphobia", '300', true);
+const book2 =  new Book("The iCarly chronices", "Dan the Feet man", "420", true);
+const book3 =  new Book("The Great Gatsby", "F. Scott Fitzgerald", "350", false);
+const book4 =  new Book('The Bible', "Many, many others", "4200", false);
 
-let sampleArray = [book1, book2, book3, book4];
 
 const container = document.querySelector('.book-container');
 
@@ -59,25 +58,7 @@ function resetLibrary() {
 
 function displayBooks(arr) {
     for (const element of arr) {
-        // need to create new div book element w/ stated properties of 
-        // element of arr
-        // loop through elemetn of arr
-        // and then call displaybook for each time through the loop
-        // displayBook
-        const newBook = document.createElement('div');
-        newBook.classList.add('book');
-        // appends corresponding three boxes for text
-        newBook.appendChild();
-        newBook.appendChild();
-        newBook.appendChild();
-
-        // appends two bottons
-        newBook.appendChild();
-        // this one should be a constant
-        newBook.appendChild();
-        container.appendChild(newBook);
-    }
-}
+        displayBook(element)}}
 
 // U want to fix this at one book per section
 // should I just displaybook? 
@@ -87,23 +68,52 @@ function displayBooks(arr) {
 
 
 // adds an html element for the inputted book
-function displayBook(Book){
-    // appends the new book to the container div
-    const newBook = document.createElement('div');
-    newBook.classList.add('book');
-    // appends corresponding three boxes for text
-    newBook.appendChild();
-    newBook.appendChild();
-    newBook.appendChild();
+function displayBook(element){
+    let newBook = document.createElement('div');
+        let buttonChanges = document.createElement('button');
+        let authorHeading = document.createElement('h3');
+        let pagesHeading = document.createElement('h3');
+        let titleHeading = document.createElement('h3');
+        let buttonStatic  = document.createElement('button');
+        let buttonContainer = document.createElement('div');
+        buttonContainer.classList.add('button-container');
+        buttonStatic.textContent = "remove";
+        
+        newBook.classList.add('book');
+        // appends corresponding three boxes for text
+        titleHeading.textContent = element.title
+        newBook.appendChild(titleHeading);
 
-    // appends two bottons
-    newBook.appendChild();
-    // this one should be a constant
-    newBook.appendChild();
-    container.appendChild(newBook);
+        authorHeading.textContent = element.author;
+        newBook.appendChild(authorHeading);
 
+        pagesHeading.textContent = element.pages;
+        newBook.appendChild(pagesHeading);
+
+        // appends two bottons
+        
+        if (element.isReadYet) {
+            buttonChanges.classList.add('read');
+            buttonChanges.textContent = "read" ;
+        } else {
+            buttonChanges.classList.add('unread');
+            buttonChanges.textContent ='unread';
+        }
+        buttonContainer.appendChild(buttonStatic);
+        buttonContainer.appendChild(buttonChanges);
+        newBook.appendChild(buttonContainer);
+
+        
+        container.appendChild(newBook);
 }
 
 
+myLibrary = [book1, book2, book3, book4];
+
 displayBooks(myLibrary); 
 
+//<h3 class="book-title">Harry Porter</h3>
+//<h3 class="author">Jk. Jimmy jones</h3>
+//<h3 class="pages">400 pages</h3>
+//<button>Read</button>
+//<button></button>

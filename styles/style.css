@@ -5,14 +5,18 @@ html, body {
     height: 100%;
     background-color: #ceedec;
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 
 .main {
-    margin-left:  200px;
-    margin-right: 200px;
+    padding-left:  8%;
+    padding-right: 8%;
     display: flex;
     flex-direction: column;
+    
 }
 
 
@@ -50,10 +54,11 @@ html, body {
     align-items: center;
     justify-content: space-between;
     flex-basis: 20%;
-    height: 300px;
+    height: 220px;
     background-color: #ebe9f0;
-    margin: 20px;
-    border-radius: 10px;
+    margin: 10px;
+    
+    border-radius: 20px;
     font-family: Arial, Helvetica, sans-serif;
     padding: 20px 0 ;
 }
@@ -68,11 +73,20 @@ button {
     height: 30px;
 }
 
-.unread {
+.read {
 
 }
 
 .unread {
     background-color: #9997a1;
 }
+
+.constant-button {
+}
+
+.btn-container {
+    display: flex;
+    align-items: center;
+}
+
 
