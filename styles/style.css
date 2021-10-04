@@ -39,7 +39,8 @@ html, body {
     text-align: center;
     background-color: #c2bec4;
     padding: 10px 0 5px 0;
-    font-size: 20px
+    font-size: 20px;
+    justify-self: flex-end;
 }
 
 .book-container {
@@ -89,4 +90,9 @@ button {
     align-items: center;
 }
 
+.add-button {
+    width: 40%;
+    border-radius: 3px;
+    height: 50px;
+}
 
