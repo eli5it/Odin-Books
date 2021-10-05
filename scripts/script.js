@@ -4,12 +4,49 @@ const book1 =  new Book("Harry Potter", "transphobia", '300', true);
 const book2 =  new Book("The iCarly chronices", "Dan the Feet man", "420", true);
 const book3 =  new Book("The Great Gatsby", "F. Scott Fitzgerald", "350", false);
 const book4 =  new Book('The Bible', "Many, many others", "4200", false);
-
-
+const inputButton = document.querySelector('.add-button');
 const container = document.querySelector('.book-container');
 
+const modal = document.querySelector('.modal');
+const modalSubmitButton = modal.querySelector('button');
+let modal_author =  modal.querySelector('.modal-author');
+
+modalSubmitButton.addEventListener("click", function() {
+    let inputtedTitle = modal.querySelector('.modal-title').value;
+    let inputtedAuthor= modal.querySelector('.modal-author').value;
+    let inputtedPages= modal.querySelector('.modal-pages').value;
+    let checkbox = modal.querySelector('input[type = "checkbox"]');
 
 
+    if (inputtedPages == '' || inputtedTitle == '' || inputtedAuthor == '') {
+        alert('fill out the entire form please');
+    } else { 
+        // both adds book to myLibrary array and displays it
+        addBookToLibrary(inputtedTitle, inputtedAuthor, inputtedPages, checkbox.checked);
+        modal.classList.toggle("open");
+        modalOverlay.classList.toggle("overlay-open");
+    }
+
+
+
+    // both adds book to myLibrary array and displays it
+    addBookToLibrary(inputtedTitle, inputtedAuthor, inputtedPages, checkbox.checked);
+    modal.classList.toggle("open");
+    modalOverlay.classList.toggle("overlay-open");
+})
+
+
+const modalOverlay= document.querySelector('.modal-overlay');
+
+inputButton.addEventListener("click", function() {
+    modal.classList.toggle("open");
+    modalOverlay.classList.toggle("overlay-open");
+  });
+
+modalOverlay.addEventListener('click', function() {
+    modal.classList.toggle("open");
+    modalOverlay.classList.toggle("overlay-open")
+})
 
 
 
@@ -29,8 +66,10 @@ function Book(title, author, pages, isReadYet) {
 // I could also let it accept arrays and loop through
 // but I don't currently see the advantage of that
 // 
-function addBookToLibrary(book) {
-    myLibrary.push(book);
+function addBookToLibrary(title, author, pages, isChecked) {
+    let newBook = new Book(title, author, pages)
+    myLibrary.push(newBook);
+    displayBook(newBook);
 }
 
 // removes specified book from the myLibrary Array
@@ -81,14 +120,14 @@ function displayBook(element){
         
         newBook.classList.add('book');
         // appends corresponding three boxes for text
-        titleHeading.textContent = element.title
+        titleHeading.textContent = element.title;
         newBook.appendChild(titleHeading);
 
         authorHeading.textContent = element.author;
         newBook.appendChild(authorHeading);
 
-        pagesHeading.textContent = element.pages;
-        newBook.appendChild(pagesHeading);
+        pagesHeading.textContent = `${element.pages} pages`
+        newBook.appendChild(pagesHeading) ;
 
         // appends two bottons
         
@@ -99,6 +138,7 @@ function displayBook(element){
             buttonChanges.classList.add('unread');
             buttonChanges.textContent ='unread';
         }
+        buttonStatic.classList.add('remove-button');
         buttonContainer.appendChild(buttonStatic);
         buttonContainer.appendChild(buttonChanges);
         newBook.appendChild(buttonContainer);
@@ -112,8 +152,34 @@ myLibrary = [book1, book2, book3, book4];
 
 displayBooks(myLibrary); 
 
-//<h3 class="book-title">Harry Porter</h3>
-//<h3 class="author">Jk. Jimmy jones</h3>
-//<h3 class="pages">400 pages</h3>
-//<button>Read</button>
-//<button></button>
+// I think I need to set event listeners upon each time the page is reloaded (assuming that at some point I implement local storage)
+
+
+function setRemoveButton(button) {
+    button.addEventListener(button => button.addEventListener('click',() => {
+        console.log('delete my dad please');
+    } 
+    
+        ) )}
+
+ // every time a new Book is created, call this function and assign button corrsponding id
+ // to book's position in index       
+function setButtonId(button) {
+    
+}
+
+// array (of books)  - > array (of strings which are book names)
+function mapBookTitle {
+
+}
+
+function resetButtons() {
+    let removeButtons = document.querySelectorAll('.remove-button');
+    removeButtons.forEach(button => setButtonId(button))
+}
+// sets removal properties upon first intialization
+let removeButtons = document.querySelectorAll('.remove-button');
+removeButtons.forEach(button => setRemoveButton(button))
+
+
+// query selector / function for remove buttons
