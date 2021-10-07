@@ -38,16 +38,16 @@ html, body {
 .footer {
     text-align: center;
     background-color: #c2bec4;
-    padding: 10px 0 5px 0;
-    font-size: 20px;
+    
+    font-size: 13px;
     justify-self: flex-end;
-    margin-top: 50px;
+    margin-top: 110px;
 }
 
 .book-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    
 }
 
 .book {
@@ -58,11 +58,12 @@ html, body {
     flex-basis: 20%;
     height: 220px;
     background-color: #ebe9f0;
-    margin: 10px;
+    margin-left: 40px;
+    margin-top: 40px;
     
     border-radius: 20px;
     font-family: Arial, Helvetica, sans-serif;
-    padding: 20px 0 ;
+    padding: 40px 0 30px;
 }
 
 .book h3 {
@@ -76,11 +77,11 @@ button {
 }
 
 .read {
+    background-color: #9997a1;
 
 }
 
 .unread {
-    background-color: #9997a1;
 }
 
 .constant-button {
@@ -90,10 +91,11 @@ button {
    display: flex;
    justify-content: center;
    align-items: center;
+   margin-top: 30px;
 }
 
 .add-button {
-    width: 40%;
+    width: 25%;
     border-radius: 6px;
     height: 50px;
     margin-bottom: 40px;
@@ -106,12 +108,13 @@ button {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 400px;
-    height: 500px;
+    height: 480px;
     max-height: 100%;
     max-width: 100%;
     background-color: white;
     z-index: 110;
     background-color: #d3d2d2;
+    border-radius: 16px;
 
 
 }
@@ -131,14 +134,22 @@ button {
 
 .modal-content {
  /* covers the entire size of the modal */
+  
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: 92%;
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  
+  
 
   /* spacing around */
-  padding: 20px;
+ 
 
   /* lets page scroll */
   overflow: auto;
@@ -148,7 +159,7 @@ button {
 
 }
 .modal.open {
-    display: flex;
+    display: block;
 
 }
 
@@ -157,20 +168,30 @@ button {
 }
 
 
-.modal-title, .modal-pages, .modal-author, .modal-question, .modal-btn {
-    border-radius: 2px;
+.modal-title, .modal-pages, .modal-author {
+    border-radius: 6px;
+    height: 40px;
+    width: 300px;
+    font-size: 20px ;
+    margin-top: 20px;
 
-
+}
+.modal-question {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .modal-btn {
-
+    height: 40px;
+    width: 200px;
 }
 
-.modal-question {
 
-}
-
-input .number {
-    
+#checkbox {
+    width: 30px;
+    height: 60px;
+    border-radius: 5px;
 }

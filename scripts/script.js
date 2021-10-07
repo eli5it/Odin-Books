@@ -25,14 +25,10 @@ modalSubmitButton.addEventListener("click", function() {
         addBookToLibrary(inputtedTitle, inputtedAuthor, inputtedPages, checkbox.checked);
         modal.classList.toggle("open");
         modalOverlay.classList.toggle("overlay-open");
+        resetModal();
     }
+    
 
-
-
-    // both adds book to myLibrary array and displays it
-    addBookToLibrary(inputtedTitle, inputtedAuthor, inputtedPages, checkbox.checked);
-    modal.classList.toggle("open");
-    modalOverlay.classList.toggle("overlay-open");
 })
 
 
@@ -45,8 +41,16 @@ inputButton.addEventListener("click", function() {
 
 modalOverlay.addEventListener('click', function() {
     modal.classList.toggle("open");
-    modalOverlay.classList.toggle("overlay-open")
+    modalOverlay.classList.toggle("overlay-open");
+    resetModal();
 })
+
+
+function resetModal() {
+    modal.querySelector('.modal-title').value = '';
+    modal.querySelector('.modal-author').value = '';
+    modal.querySelector('.modal-pages').value= '';
+}
 
 
 
@@ -67,7 +71,7 @@ function Book(title, author, pages, isReadYet) {
 // but I don't currently see the advantage of that
 // 
 function addBookToLibrary(title, author, pages, isChecked) {
-    let newBook = new Book(title, author, pages)
+    let newBook = new Book(title, author, pages, isChecked);
     myLibrary.push(newBook);
     displayBook(newBook);
 }
@@ -115,6 +119,10 @@ function displayBook(element){
         let titleHeading = document.createElement('h3');
         let buttonStatic  = document.createElement('button');
         let buttonContainer = document.createElement('div');
+        let arrayPos = myLibrary.length - 1;
+        newBook.id = "div-" + arrayPos;
+        // newly created button now works functionally for deleting
+        setRemoveButton(buttonStatic);
         buttonContainer.classList.add('button-container');
         buttonStatic.textContent = "remove";
         
@@ -135,10 +143,13 @@ function displayBook(element){
             buttonChanges.classList.add('read');
             buttonChanges.textContent = "read" ;
         } else {
-            buttonChanges.classList.add('unread');
             buttonChanges.textContent ='unread';
         }
+        buttonChanges.classList.add('unread');
         buttonStatic.classList.add('remove-button');
+        buttonStatic.id = arrayPos;
+        setReadToggle(buttonChanges);
+
         buttonContainer.appendChild(buttonStatic);
         buttonContainer.appendChild(buttonChanges);
         newBook.appendChild(buttonContainer);
@@ -148,38 +159,71 @@ function displayBook(element){
 }
 
 
-myLibrary = [book1, book2, book3, book4];
 
-displayBooks(myLibrary); 
+
 
 // I think I need to set event listeners upon each time the page is reloaded (assuming that at some point I implement local storage)
 
 
 function setRemoveButton(button) {
-    button.addEventListener(button => button.addEventListener('click',() => {
-        console.log('delete my dad please');
+    button.addEventListener('click',function()  {
+        let deletePos = button.id;
+        myLibrary.splice(deletePos, 1);
+        updateDisplay(button);
+        
+        
     } 
     
-        ) )}
+        ) }
 
- // every time a new Book is created, call this function and assign button corrsponding id
- // to book's position in index       
-function setButtonId(button) {
-    
+
+
+// finds parent div of button and deletes from doc
+function updateDisplay(button) {
+    let idVal = button.id;
+    let divID = "div-" + idVal;
+    let deleteDiv = document.getElementById(divID);
+    deleteDiv.remove();
+    console.log('current Id val is' + idVal)
+    if (idVal < myLibrary.length) {
+        updateButtonIds(idVal);
+    }
 }
+// updates ids with their new corresponding array locations
+ function updateButtonIds(pos) {
+    console.log('im on the job');
+    console.log(pos);
+    let i = 1 + parseInt(pos);
+    console.log(`i is currently ${i} and length is currently ${myLibrary.length}`);
+    while ( i <= myLibrary.length) {
+        console.log('i be changing ids');
+        let currentButton = document.getElementById(i);
+        let currentDiv = document.getElementById("div-" + i);
+        let newIdVal= currentButton.id -1;
+        currentButton.id -=1;
+        currentDiv.id = "div-" +newIdVal;
+        i++;
 
-// array (of books)  - > array (of strings which are book names)
-function mapBookTitle {
-
+    }
 }
+function setReadToggle(button) {
+    button.addEventListener('click',function()  {
+       if (button.textContent == 'unread') {
+           button.textContent = 'read'
+       } else {button.textContent ='unread'}
+       button.classList.toggle('read');
+       
+})}
 
-function resetButtons() {
-    let removeButtons = document.querySelectorAll('.remove-button');
-    removeButtons.forEach(button => setButtonId(button))
-}
-// sets removal properties upon first intialization
 let removeButtons = document.querySelectorAll('.remove-button');
-removeButtons.forEach(button => setRemoveButton(button))
+removeButtons.forEach(button => setRemoveButton(button));
 
 
-// query selector / function for remove buttons
+
+// let readButtons = document.querySelectorAll('.read');
+// readButtons.forEach(button => setReadToggle(button));
+
+
+let unreadButtons = document.querySelectorAll('.unread');
+unreadButtons.forEach(button => setReadToggle(button));
+displayBooks(myLibrary); 
