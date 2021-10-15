@@ -1,9 +1,6 @@
 let myLibrary = [];
 
-const book1 =  new Book("Harry Potter", "transphobia", '300', true);
-const book2 =  new Book("The iCarly chronices", "Dan the Feet man", "420", true);
-const book3 =  new Book("The Great Gatsby", "F. Scott Fitzgerald", "350", false);
-const book4 =  new Book('The Bible', "Many, many others", "4200", false);
+
 const inputButton = document.querySelector('.add-button');
 const container = document.querySelector('.book-container');
 
