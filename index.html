@@ -24,17 +24,17 @@
         <div class="modal-content">
             <h2 style="margin-bottom: 40px;">Add a new book to your library</h2>
             <div>
-                <input type="text" placeholder="Title" class="modal-title" ></input>
+                <input type="text" placeholder="Title" class="modal-title" required ></input>
             </div>
             <div >
-                <input type="text" placeholder="Author" class="modal-author"></input>
+                <input type="text" placeholder="Author" class="modal-author" required></input>
             </div>
-                <input placeholder="Number of pages" type="number" class="modal-pages" minlength="1" maxlength="4"></input>
+                <input required placeholder="Number of pages" type="number" class="modal-pages" minlength="1" maxlength="4"></input>
             <div ></div>
             <div class="modal-question">
                 <h2>Have you read it?  
                 </h2>
-                <input id="checkbox" type="checkbox" ></input>
+                <input required id="checkbox" type="checkbox" ></input>
             </div>
             <button class="modal-btn">Submit</button>
 
